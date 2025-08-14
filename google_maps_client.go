@@ -9,25 +9,27 @@ import (
 )
 
 type GoogleMapsClient struct {
-	apiKey     string
-	httpClient *http.Client
+	apiKey        string
+	radiusInMeters int
+	httpClient    *http.Client
 }
 
-func NewGoogleMapsClient(apiKey string) *GoogleMapsClient {
+func NewGoogleMapsClient(apiKey string, radiusInMeters int) *GoogleMapsClient {
 	return &GoogleMapsClient{
-		apiKey:     apiKey,
-		httpClient: &http.Client{},
+		apiKey:        apiKey,
+		radiusInMeters: radiusInMeters,
+		httpClient:    &http.Client{},
 	}
 }
 
-func (c *GoogleMapsClient) NearbySearch(lat, lng string, radius int, placeType string) (*PlacesResponse, error) {
+func (c *GoogleMapsClient) NearbySearch(lat, lng string, placeType string) (*PlacesResponse, error) {
 	var urlBuilder strings.Builder
 	urlBuilder.WriteString("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=")
 	urlBuilder.WriteString(lat)
 	urlBuilder.WriteString(",")
 	urlBuilder.WriteString(lng)
 	urlBuilder.WriteString("&radius=")
-	urlBuilder.WriteString(strconv.Itoa(radius))
+	urlBuilder.WriteString(strconv.Itoa(c.radiusInMeters))
 	urlBuilder.WriteString("&type=")
 	urlBuilder.WriteString(placeType)
 	urlBuilder.WriteString("&key=")

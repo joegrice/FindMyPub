@@ -21,7 +21,7 @@ type PubWithDistance struct {
 }
 
 func getPlacesInternal(client *GoogleMapsClient, lat, lng string) ([]PubWithDistance, error) {
-	placesResponse, err := client.NearbySearch(lat, lng, 1609, "bar")
+	placesResponse, err := client.NearbySearch(lat, lng, "bar")
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ func getPlaces(client *GoogleMapsClient) http.HandlerFunc {
 func getLocationFromIP(ip string) (*Location, error) {
 	// For testing purposes, since localhost will resolve to ::1 or 127.0.0.1
 	if ip == "::1" || ip == "127.0.0.1" {
-		ip = "8.8.8.8" // Google's DNS
+		ip = "35.242.175.203" // GOOGLE-CLOUD-PLATFORM London DNS
 		log.Printf("Using test IP address: %s", ip)
 	}
 

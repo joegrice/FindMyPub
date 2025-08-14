@@ -12,12 +12,11 @@ import (
 
 type PubWithDistance struct {
 	Place    `json:"-"`
-	Name     string   `json:"name"`
-	Vicinity string   `json:"vicinity"`
-	Distance string   `json:"distance"`
-	Duration string   `json:"duration"`
-	Types    []string `json:"types"`
-	PhotoURL string   `json:"photo_url"`
+	Name     string `json:"name"`
+	Vicinity string `json:"vicinity"`
+	Distance string `json:"distance"`
+	Duration string `json:"duration"`
+	PhotoURL string `json:"photo_url"`
 }
 
 func getPlacesInternal(client *GoogleMapsClient, lat, lng string) ([]PubWithDistance, error) {
@@ -38,7 +37,8 @@ func getPlacesInternal(client *GoogleMapsClient, lat, lng string) ([]PubWithDist
 			var photoURL string
 			if len(place.Photos) > 0 {
 				var photoURLBuilder strings.Builder
-				photoURLBuilder.WriteString("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=")
+				photoURLBuilder.WriteString(GooglePlacePhotoURL)
+				photoURLBuilder.WriteString("?maxwidth=400&photoreference=")
 				photoURLBuilder.WriteString(place.Photos[0].PhotoReference)
 				photoURLBuilder.WriteString("&key=")
 				photoURLBuilder.WriteString(client.apiKey)
@@ -51,7 +51,6 @@ func getPlacesInternal(client *GoogleMapsClient, lat, lng string) ([]PubWithDist
 				Vicinity: place.Vicinity,
 				Distance: distanceResponse.Rows[0].Elements[0].Distance.Text,
 				Duration: distanceResponse.Rows[0].Elements[0].Duration.Text,
-				Types:    place.Types,
 				PhotoURL: photoURL,
 			})
 		}
@@ -98,7 +97,7 @@ func getLocationFromIP(ip string) (*Location, error) {
 		return nil, err
 	}
 
-	log.Printf("ip-api.com response: %s", string(body))
+	// log.Printf("ip-api.com response: %s", string(body))
 
 	var location struct {
 		Lat float64 `json:"lat"`

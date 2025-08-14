@@ -5,12 +5,11 @@ type PlacesResponse struct {
 }
 
 type Place struct {
-	Name      string   `json:"name"`
-	Vicinity  string   `json:"vicinity"`
-	Geometry  Geometry `json:"geometry"`
-	PlaceID   string   `json:"place_id"`
-	Types     []string `json:"types"`
-	Photos    []Photo  `json:"photos"`
+	Name     string   `json:"name"`
+	Vicinity string   `json:"vicinity"`
+	Geometry Geometry `json:"geometry"`
+	PlaceID  string   `json:"place_id"`
+	Photos   []Photo  `json:"photos"`
 }
 
 type Photo struct {

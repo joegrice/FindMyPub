@@ -24,7 +24,8 @@ func NewGoogleMapsClient(apiKey string, radiusInMeters int) *GoogleMapsClient {
 
 func (c *GoogleMapsClient) NearbySearch(lat, lng string, placeType string) (*PlacesResponse, error) {
 	var urlBuilder strings.Builder
-	urlBuilder.WriteString("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=")
+	urlBuilder.WriteString(GooglePlacesNearbySearchURL)
+	urlBuilder.WriteString("?location=")
 	urlBuilder.WriteString(lat)
 	urlBuilder.WriteString(",")
 	urlBuilder.WriteString(lng)
@@ -59,7 +60,8 @@ func (c *GoogleMapsClient) NearbySearch(lat, lng string, placeType string) (*Pla
 
 func (c *GoogleMapsClient) DistanceMatrix(originLat, originLng, placeID, mode, units string) (*DistanceMatrixResponse, error) {
 	var distanceURLBuilder strings.Builder
-	distanceURLBuilder.WriteString("https://maps.googleapis.com/maps/api/distancematrix/json?origins=")
+	distanceURLBuilder.WriteString(GoogleDistanceMatrixURL)
+	distanceURLBuilder.WriteString("?origins=")
 	distanceURLBuilder.WriteString(originLat)
 	distanceURLBuilder.WriteString(",")
 	distanceURLBuilder.WriteString(originLng)

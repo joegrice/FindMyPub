@@ -11,9 +11,10 @@ To get started, you will need to have Go installed on your machine.
     *   Create a new project or select an existing one.
     *   Enable the "Places API" and "Distance Matrix API".
     *   Create an API key.
-2.  **Update the API Key:**
-    *   Open the `main.go` file.
-    *   Replace the placeholder `apiKey` with your actual Google Maps API key.
+2.  **Update Configuration:**
+    *   Open the `config.go` file.
+    *   Replace the placeholder `GoogleAPIKey` with your actual Google Maps API key.
+    *   Optionally, adjust the `DefaultRadiusInMeters` constant to change the search radius for nearby places.
 3.  **Run the application:**
     ```bash
     go run .
@@ -59,13 +60,6 @@ GET /places?lat=37.422&lng=-122.084
     "vicinity": "541 Ramona St, Palo Alto",
     "distance": "0.5 mi",
     "duration": "10 mins",
-    "types": [
-      "bar",
-      "restaurant",
-      "food",
-      "point_of_interest",
-      "establishment"
-    ],
     "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=..."
   }
 ]
